@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  color: blue;
+
+  padding: 10px;
+  justify-content: center;
+}
+.App {
+  background-color: #c2dad0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-height: 100vh;
+}
+.MuiAppBar-colorPrimary {
+  position: fixed !important;
+}
+.MuiGrid-spacing-xs-3 {
+  margin-top: 100px !important;
+}
+.MuiAppBar-colorPrimary {
+  background-color: lightseagreen !important;
+}
+.MuiInputBase-root {
+  width: 100%;
+}
+.makeStyles-media-17:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
