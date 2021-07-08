@@ -1,3 +1,4 @@
+[demo](https://balachandraiahnews.netlify.app/)
 # mern-news-app
 
 #Goto news demo folder and open command prompt on same path and install npm packages using below command
