@@ -14,16 +14,6 @@ function NewsArticle({ data }) {
   };
   return (
     <Card className={classes.card} onClick={() => cardClickHandler(data.url)}>
-      <div className={classes.header_inline}>
-        <p>{`Source:${data.source.name}`}</p>
-        {data.author ? <p>{`Author:${data.author}`}</p> : null}
-      </div>
-
-      <div>
-        <Typography variant="body2">
-          {`Posted:${moment(data.publishedAt).fromNow()}`}
-        </Typography>
-      </div>
       {data.urlToImage ? (
         <CardMedia className={classes.media} image={data.urlToImage} />
       ) : (
@@ -34,6 +24,10 @@ function NewsArticle({ data }) {
           }
         />
       )}
+      <div className={classes.header_inline}>
+        <p>{`Source:${data.source.name}`}</p>
+        {`${moment(data.publishedAt).fromNow()}`}
+      </div>
       <CardContent>
         <Typography
           className={classes.title}
