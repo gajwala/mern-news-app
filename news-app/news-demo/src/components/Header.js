@@ -19,7 +19,6 @@ import CountryModel from "../models/Country";
 import CategoryModel from "../models/Categorey";
 function Header({
   handleChange,
-  query,
   handleCountryChange,
   handleCategoryChange,
   forCountry,
@@ -54,7 +53,6 @@ function Header({
               }}
               inputProps={{ "aria-label": "search" }}
               onChange={handleChange}
-              value={query}
             />
           </div>
           <div className="header_dropdown">
