@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 // import NewsContextProvider from "./NewsContext";
 import News from "./components/News";
@@ -8,18 +8,12 @@ import axios from "axios";
 import getBaseURL from "./constants/APIKey";
 const baseURL = getBaseURL();
 function App() {
-  const [query, setQuery] = useState("");
   const [forCountry, setForCountry] = React.useState("gb");
   const [forcategory, setForCategory] = React.useState("general");
   const [toquery, setToQuery] = useState("");
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState([]);
 
-  useEffect(() => {
-    if (query) {
-      setToQuery(`&q=${query}`);
-    }
-  }, [query]);
   useEffect(() => {
     fetchData();
   }, [toquery, forcategory, forCountry, page]);
@@ -38,10 +32,24 @@ function App() {
       console.log(error);
     }
   };
+  const debounce = (fn) => {
+    let timer;
+    return function (...args) {
+      const context = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        fn.apply(context, args);
+      }, 500);
+    };
+  };
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    const { value } = e.target;
+    setToQuery(`&q=${value}`);
   };
+
+  const optimisedVersion = useCallback(debounce(handleChange), []);
 
   const forCountryChange = (event) => {
     setForCountry(`${event.target.value}`);
@@ -59,8 +67,7 @@ function App() {
   return (
     <div className="App">
       <Header
-        handleChange={handleChange}
-        query={query}
+        handleChange={optimisedVersion}
         handleCountryChange={forCountryChange}
         handleCategoryChange={forCategoryChange}
         forCountry={forCountry}
